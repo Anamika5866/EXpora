@@ -28,11 +28,55 @@ const Feed: React.FC = () => {
       title: 'My First Tech Conference',
       content: 'Attending my first tech conference was overwhelming at first, but I quickly found my community. Here are my top takeaways and networking tips for first-timers...',
       category: 'Career',
-      image: '',
+      image: 'https://www.pexels.com/photo/group-of-people-standing-beside-body-of-water-2672979',
       likes: 87,
       comments: 12,
       createdAt: '5 days ago'
-    }
+    },
+    {
+      id: '3',
+      author: { 
+      name: 'Sophia Patel', 
+      avatar: 'https://www.pexels.com/photo/woman-in-yellow-sweater-smiling-1181686/' 
+      },
+      title: 'The Art of Minimalist Living',
+      content: 'Over the past year, I’ve been decluttering my home and my mind. Minimalism has completely changed how I view happiness, success, and personal space...',
+      category: 'Lifestyle',
+      image: 'https://www.pexels.com/photo/minimalist-living-room-interior-1571468/',
+      likes: 102,
+      comments: 25,
+      createdAt: '1 week ago'
+    },
+    {
+      id: '4',
+      author: { 
+      name: 'Ethan Walker', 
+      avatar: 'https://www.pexels.com/photo/man-in-gray-jacket-614810/' 
+      },
+      title: 'How I Built My First Side Hustle',
+      content: 'Starting small was the key. From brainstorming at coffee shops to launching my first digital product, here’s how I turned an idea into a source of income...',
+      category: 'Entrepreneurship',
+      image: 'https://www.pexels.com/photo/person-holding-black-pen-while-writing-on-notebook-669615/',
+      likes: 149,
+      comments: 34,
+      createdAt: '3 days ago'
+    },
+    {
+      id: '5',
+      author: { 
+      name: 'Liam Johnson', 
+      avatar: 'https://www.pexels.com/photo/man-wearing-white-shirt-2379004/' 
+      },
+      title: 'Finding Balance in a Digital World',
+      content: 'Constant notifications and screen time were draining me. I decided to take a digital detox — here’s what I learned about mindfulness and being present in the moment...',
+      category: 'Wellness',
+      image: 'https://www.pexels.com/photo/person-holding-smartphone-on-table-4065632/',
+      likes: 96,
+      comments: 14,
+      createdAt: '4 days ago'
+      }
+
+
   ];
 
   return (
@@ -62,8 +106,8 @@ const Feed: React.FC = () => {
         </TabsList>
       </Tabs>
 
-      <ScrollArea className="h-[calc(100vh-230px)]">
-        <div className="space-y-6">
+      
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 ">
           {experiences.map((experience) => (
             <Card key={experience.id} className="overflow-hidden">
               <CardHeader className="p-4">
@@ -121,7 +165,7 @@ const Feed: React.FC = () => {
             </Card>
           ))}
         </div>
-      </ScrollArea>
+      
     </div>
   );
 };

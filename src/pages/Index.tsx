@@ -442,7 +442,7 @@ const Index: React.FC = () => {
           <h2 className="text-3xl font-bold text-center mb-12">Why Share Your Experiences?</h2>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <div className="bg-soft-purple-50 p-8 rounded-xl shadow-md transform transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+            <div className="bg-soft-purple-50 p-8 rounded-xl shadow-md transform transition-all duration-300 hover:shadow-lg hover:scale-105 border-2 border-transparent hover:border-purple-400">
               <div className="w-14 h-14 bg-gradient-to-br from-vivid-purple to-purple-400 text-white rounded-full flex items-center justify-center mb-4 shadow-md">
                 <Globe2 className="h-7 w-7" />
               </div>
@@ -450,7 +450,7 @@ const Index: React.FC = () => {
               <p className="text-gray-600">Build meaningful connections with like-minded individuals who share your interests and passions across the globe.</p>
             </div>
             
-            <div className="bg-soft-green p-8 rounded-xl shadow-md transform transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+            <div className="bg-soft-green p-8 rounded-xl shadow-md transform transition-all duration-300 hover:shadow-lg hover:scale-105 border-2 border-transparent hover:border-green-400">
               <div className="w-14 h-14 bg-gradient-to-br from-green-500 to-green-400 text-white rounded-full flex items-center justify-center mb-4 shadow-md">
                 <Camera className="h-7 w-7" />
               </div>
@@ -458,7 +458,7 @@ const Index: React.FC = () => {
               <p className="text-gray-600">Your unique stories and perspectives can motivate and inspire others to pursue new adventures and opportunities.</p>
             </div>
             
-            <div className="bg-soft-peach p-8 rounded-xl shadow-md transform transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+            <div className="bg-soft-peach p-8 rounded-xl shadow-md transform transition-all duration-300 hover:shadow-lg hover:scale-105 border-2 border-transparent hover:border-orange-400">
               <div className="w-14 h-14 bg-gradient-to-br from-orange-500 to-orange-400 text-white rounded-full flex items-center justify-center mb-4 shadow-md">
                 <Heart className="h-7 w-7" />
               </div>
@@ -466,7 +466,7 @@ const Index: React.FC = () => {
               <p className="text-gray-600">Reflect on your experiences and learn from others to foster personal development and expand your horizons.</p>
             </div>
             
-            <div className="bg-soft-blue p-8 rounded-xl shadow-md transform transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+            <div className="bg-soft-blue p-8 rounded-xl shadow-md transform transition-all duration-300 hover:shadow-lg hover:scale-105 border-2 border-transparent hover:border-blue-400">
               <div className="w-14 h-14 bg-gradient-to-br from-blue-500 to-blue-400 text-white rounded-full flex items-center justify-center mb-4 shadow-md">
                 <Map className="h-7 w-7" />
               </div>
@@ -565,7 +565,7 @@ const Index: React.FC = () => {
               </div>
               <div className="overflow-hidden rounded-lg">
                 <img className="h-auto max-w-full rounded-lg object-cover transition-all duration-300 hover:scale-105" 
-                     src="https://images.unsplash.com/photo-1519411032315-54ef2cb783bb?auto=format&fit=crop&w=600&q=80" 
+                     src="https://plus.unsplash.com/premium_photo-1716025524809-048d12b087d6?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTAyfHxtb3VudGFpbiUyMHZpbGxhZ2V8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&q=60&w=600" 
                      alt="Mountain village" />
               </div>
             </div>
