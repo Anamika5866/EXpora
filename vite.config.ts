@@ -26,10 +26,10 @@ import path from "path";
 import { componentTagger } from "lovable-tagger";
 
 export default defineConfig(({ mode }) => ({
-  base: "/EXpora/", // 👈 this is VERY important for GitHub Pages
+  base: mode === "production" ? "/EXpora/" : "./", // <- production: GitHub Pages, dev: relative
   server: {
     host: "::",
-    port: 8080,
+    port: 8085, // pick a stable dev port
   },
   plugins: [
     react(),

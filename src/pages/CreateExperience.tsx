@@ -34,7 +34,7 @@ const CreateExperience: React.FC = () => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const { toast } = useToast();
-  
+
   const handleDrag = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
     e.stopPropagation();
@@ -54,13 +54,13 @@ const CreateExperience: React.FC = () => {
 
   const handleMediaUpload = (files: FileList | null) => {
     if (!files) return;
-    
+
     const newFiles: MediaFile[] = [];
     let unsupportedFiles = 0;
 
     Array.from(files).forEach(file => {
       const fileType = getFileType(file);
-      
+
       if (fileType) {
         const preview = URL.createObjectURL(file);
         newFiles.push({ file, type: fileType, preview });
@@ -102,7 +102,7 @@ const CreateExperience: React.FC = () => {
 
   const handleTextFormat = (format: string) => {
     if (!textareaRef.current) return;
-    
+
     const textarea = textareaRef.current;
     const start = textarea.selectionStart;
     const end = textarea.selectionEnd;
@@ -140,7 +140,7 @@ const CreateExperience: React.FC = () => {
 
     const newContent = content.substring(0, start) + formattedText + content.substring(end);
     setContent(newContent);
-    
+
     setTimeout(() => {
       if (textareaRef.current) {
         if (start === end) {
@@ -155,12 +155,12 @@ const CreateExperience: React.FC = () => {
 
   const copyToClipboard = () => {
     if (!textareaRef.current) return;
-    
+
     const textarea = textareaRef.current;
     const start = textarea.selectionStart;
     const end = textarea.selectionEnd;
     const textToCopy = start !== end ? content.substring(start, end) : content;
-    
+
     navigator.clipboard.writeText(textToCopy).then(() => {
       toast({
         title: "Copied to clipboard",
@@ -177,7 +177,7 @@ const CreateExperience: React.FC = () => {
 
   const pasteFromClipboard = async () => {
     if (!textareaRef.current) return;
-    
+
     try {
       const clipText = await navigator.clipboard.readText();
       if (!clipText) {
@@ -188,20 +188,20 @@ const CreateExperience: React.FC = () => {
         });
         return;
       }
-      
+
       const textarea = textareaRef.current;
       const start = textarea.selectionStart;
       const end = textarea.selectionEnd;
       const newContent = content.substring(0, start) + clipText + content.substring(end);
       setContent(newContent);
-      
+
       setTimeout(() => {
         if (textareaRef.current) {
           textareaRef.current.selectionStart = textareaRef.current.selectionEnd = start + clipText.length;
           textareaRef.current.focus();
         }
       }, 0);
-      
+
       toast({
         title: "Content pasted",
         description: "Clipboard content has been added to your story.",
@@ -220,35 +220,35 @@ const CreateExperience: React.FC = () => {
       const stream = await navigator.mediaDevices.getUserMedia({ video: true });
       const videoElement = document.createElement('video');
       videoElement.srcObject = stream;
-      
+
       const canvas = document.createElement('canvas');
       const context = canvas.getContext('2d');
-      
+
       await new Promise((resolve) => {
         videoElement.onloadedmetadata = () => {
           videoElement.play();
           canvas.width = videoElement.videoWidth;
           canvas.height = videoElement.videoHeight;
           context?.drawImage(videoElement, 0, 0);
-          
+
           stream.getTracks().forEach(track => track.stop());
           resolve(true);
         };
       });
-      
+
       canvas.toBlob((blob) => {
         if (blob) {
           const file = new File([blob], `camera-capture-${Date.now()}.jpg`, { type: 'image/jpeg' });
           const preview = URL.createObjectURL(blob);
           setMediaFiles(prev => [...prev, { file, type: 'image', preview }]);
-          
+
           toast({
             title: "Photo captured",
             description: "Your photo has been added to the media gallery.",
           });
         }
       }, 'image/jpeg');
-      
+
     } catch (error) {
       toast({
         title: "Camera access denied",
@@ -275,7 +275,7 @@ const CreateExperience: React.FC = () => {
       });
       return;
     }
-    
+
     if (!category) {
       toast({
         title: "Category required",
@@ -284,7 +284,7 @@ const CreateExperience: React.FC = () => {
       });
       return;
     }
-    
+
     if (!content.trim()) {
       toast({
         title: "Story required",
@@ -293,7 +293,7 @@ const CreateExperience: React.FC = () => {
       });
       return;
     }
-    
+
     toast({
       title: "Experience published!",
       description: "Your experience has been shared with the community.",
@@ -325,11 +325,11 @@ const CreateExperience: React.FC = () => {
               <span>Title</span>
               <span className="text-xs text-red-500">*</span>
             </label>
-            <Input 
-              id="title" 
+            <Input
+              id="title"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              placeholder="Give your experience a catchy title" 
+              placeholder="Give your experience a catchy title"
               className="transition-all duration-300 focus-within:border-vivid-purple"
             />
           </div>
@@ -363,11 +363,11 @@ const CreateExperience: React.FC = () => {
               </label>
               <span className="text-xs text-gray-500">Optional</span>
             </div>
-            <Input 
-              id="location" 
+            <Input
+              id="location"
               value={location}
               onChange={(e) => setLocation(e.target.value)}
-              placeholder="Where did this experience take place?" 
+              placeholder="Where did this experience take place?"
               className="transition-all duration-300 focus-within:border-vivid-purple"
             />
           </div>
@@ -380,10 +380,10 @@ const CreateExperience: React.FC = () => {
               </label>
               <div className="flex flex-wrap space-x-1">
                 {formattingButtons.map((button, index) => (
-                  <Button 
+                  <Button
                     key={index}
-                    variant="ghost" 
-                    size="sm" 
+                    variant="ghost"
+                    size="sm"
                     onClick={() => handleTextFormat(button.format)}
                     className="px-2 h-8"
                     title={button.label}
@@ -391,18 +391,18 @@ const CreateExperience: React.FC = () => {
                     {button.icon}
                   </Button>
                 ))}
-                <Button 
-                  variant="ghost" 
-                  size="sm" 
+                <Button
+                  variant="ghost"
+                  size="sm"
                   onClick={copyToClipboard}
                   className="px-2 h-8"
                   title="Copy text"
                 >
                   <Copy className="h-4 w-4" />
                 </Button>
-                <Button 
-                  variant="ghost" 
-                  size="sm" 
+                <Button
+                  variant="ghost"
+                  size="sm"
                   onClick={pasteFromClipboard}
                   className="px-2 h-8"
                   title="Paste from clipboard"
@@ -412,12 +412,12 @@ const CreateExperience: React.FC = () => {
               </div>
             </div>
             <div className="relative border rounded-md focus-within:ring-1 focus-within:ring-vivid-purple focus-within:border-vivid-purple">
-              <Textarea 
-                id="content" 
+              <Textarea
+                id="content"
                 ref={textareaRef}
                 value={content}
                 onChange={(e) => setContent(e.target.value)}
-                placeholder="Share the details of your experience..." 
+                placeholder="Share the details of your experience..."
                 className="min-h-[200px] transition-all duration-300 border-0 focus-visible:ring-0 focus-visible:ring-offset-0 font-sans"
               />
             </div>
@@ -451,7 +451,7 @@ const CreateExperience: React.FC = () => {
               </TabsList>
 
               <TabsContent value="photos">
-                <div 
+                <div
                   className={`border-2 ${dragActive ? 'border-vivid-purple bg-soft-purple-50' : 'border-dashed border-gray-300'} rounded-lg p-6 text-center cursor-pointer hover:bg-gray-50 transition-colors`}
                   onDragEnter={handleDrag}
                   onDragLeave={handleDrag}
@@ -468,13 +468,13 @@ const CreateExperience: React.FC = () => {
                     {dragActive ? 'Drop photos to upload' : 'Click to upload or drag and drop photos'}
                   </p>
                   <p className="text-xs text-gray-500 mt-1">PNG, JPG, GIF up to 10MB</p>
-                  <input 
+                  <input
                     ref={fileInputRef}
-                    id="file-upload" 
-                    type="file" 
-                    accept="image/*" 
-                    multiple 
-                    className="hidden" 
+                    id="file-upload"
+                    type="file"
+                    accept="image/*"
+                    multiple
+                    className="hidden"
                     onChange={handleFileChange}
                   />
                 </div>
@@ -497,7 +497,7 @@ const CreateExperience: React.FC = () => {
               </TabsContent>
 
               <TabsContent value="videos">
-                <div 
+                <div
                   className={`border-2 ${dragActive ? 'border-vivid-purple bg-soft-purple-50' : 'border-dashed border-gray-300'} rounded-lg p-6 text-center cursor-pointer hover:bg-gray-50 transition-colors`}
                   onDragEnter={handleDrag}
                   onDragLeave={handleDrag}
@@ -514,20 +514,20 @@ const CreateExperience: React.FC = () => {
                     {dragActive ? 'Drop videos to upload' : 'Click to upload or drag and drop videos'}
                   </p>
                   <p className="text-xs text-gray-500 mt-1">MP4, WebM, MOV up to 50MB</p>
-                  <input 
+                  <input
                     ref={fileInputRef}
-                    id="file-upload" 
-                    type="file" 
-                    accept="video/*" 
-                    multiple 
-                    className="hidden" 
+                    id="file-upload"
+                    type="file"
+                    accept="video/*"
+                    multiple
+                    className="hidden"
                     onChange={handleFileChange}
                   />
                 </div>
               </TabsContent>
 
               <TabsContent value="audio">
-                <div 
+                <div
                   className={`border-2 ${dragActive ? 'border-vivid-purple bg-soft-purple-50' : 'border-dashed border-gray-300'} rounded-lg p-6 text-center cursor-pointer hover:bg-gray-50 transition-colors`}
                   onDragEnter={handleDrag}
                   onDragLeave={handleDrag}
@@ -544,13 +544,13 @@ const CreateExperience: React.FC = () => {
                     {dragActive ? 'Drop audio files to upload' : 'Click to upload or drag and drop audio'}
                   </p>
                   <p className="text-xs text-gray-500 mt-1">MP3, WAV, OGG up to 20MB</p>
-                  <input 
+                  <input
                     ref={fileInputRef}
-                    id="file-upload" 
-                    type="file" 
-                    accept="audio/*" 
-                    multiple 
-                    className="hidden" 
+                    id="file-upload"
+                    type="file"
+                    accept="audio/*"
+                    multiple
+                    className="hidden"
                     onChange={handleFileChange}
                   />
                 </div>
@@ -564,8 +564,8 @@ const CreateExperience: React.FC = () => {
                   {mediaFiles.map((media, index) => (
                     <div key={index} className="relative group">
                       {media.type === 'image' && (
-                        <img 
-                          src={media.preview} 
+                        <img
+                          src={media.preview}
                           alt={`Upload ${index + 1}`}
                           className="w-full h-24 object-cover rounded-md border border-gray-200"
                         />
@@ -582,7 +582,7 @@ const CreateExperience: React.FC = () => {
                           <span className="text-xs text-gray-500 ml-1">{media.file.name.substring(0, 15)}</span>
                         </div>
                       )}
-                      <button 
+                      <button
                         onClick={() => removeMedia(index)}
                         className="absolute top-1 right-1 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
                       >
@@ -599,15 +599,15 @@ const CreateExperience: React.FC = () => {
             <label htmlFor="tags" className="text-sm font-medium flex items-center gap-1">
               <Tag className="h-4 w-4" /> Tags (separated by commas)
             </label>
-            <Input 
-              id="tags" 
+            <Input
+              id="tags"
               value={tags}
               onChange={(e) => setTags(e.target.value)}
-              placeholder="travel, adventure, europe, etc." 
+              placeholder="travel, adventure, europe, etc."
               className="transition-all duration-300 focus-within:border-vivid-purple"
             />
           </div>
-          
+
           <div className="bg-soft-purple-50 p-4 rounded-lg flex items-start gap-3 text-sm">
             <AlertCircle className="h-5 w-5 text-vivid-purple flex-shrink-0 mt-0.5" />
             <p className="text-gray-700">
@@ -617,7 +617,7 @@ const CreateExperience: React.FC = () => {
         </CardContent>
         <CardFooter className="flex flex-col sm:flex-row justify-between gap-3">
           <Button variant="outline" className="sm:w-auto w-full" onClick={saveDraft}>Save Draft</Button>
-          <Button 
+          <Button
             className="bg-vivid-purple hover:bg-purple-700 sm:w-auto w-full"
             onClick={handlePublish}
           >
